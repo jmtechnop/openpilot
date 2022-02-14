@@ -424,7 +424,6 @@ C2NetworkPanel::C2NetworkPanel(QWidget *parent) : QWidget(parent) {
     //if (ConfirmationDialog::confirm("Process?", this)){
     if (ConfirmationDialog::confirm("실행하시겠습니까?", this)){
       std::system(gitpull);
-      QTimer::singleShot(1000, []() { Hardware::reboot(); });
     }
   });
   list->addItem(gitpullbtn);
@@ -440,26 +439,24 @@ C2NetworkPanel::C2NetworkPanel(QWidget *parent) : QWidget(parent) {
   });
   list->addItem(realdataclearbtn);
 
-  const char* panda_flash = "sh /data/openpilot/panda/board/flash.sh";
+  const char* panda_flash = "sh /data/openpilot/scripts/flash.sh";
   //auto pandaflashbtn = new ButtonControl("Panda Firmware Flash", "RUN");
   auto pandaflashbtn = new ButtonControl("판다 펌웨어 플래싱", "실행");
   QObject::connect(pandaflashbtn, &ButtonControl::clicked, [=]() {
     //if (ConfirmationDialog::confirm("Process?", this)){
     if (ConfirmationDialog::confirm("실행하시겠습니까?", this)){
       std::system(panda_flash);
-      QTimer::singleShot(1000, []() { Hardware::reboot(); });
     }
   });
   list->addItem(pandaflashbtn);
 
-  const char* panda_recover = "sh /data/openpilot/panda/board/recover.sh";
+  const char* panda_recover = "sh /data/openpilot/scripts/recover.sh";
   //auto pandarecoverbtn = new ButtonControl("Panda Firmware Recover", "RUN");
   auto pandarecoverbtn = new ButtonControl("판다 펌웨어 복구", "실행");
   QObject::connect(pandarecoverbtn, &ButtonControl::clicked, [=]() {
     //if (ConfirmationDialog::confirm("Process?", this)){
     if (ConfirmationDialog::confirm("실행하시겠습니까?", this)){
       std::system(panda_recover);
-      QTimer::singleShot(1000, []() { Hardware::reboot(); });
     }
   });
   list->addItem(pandarecoverbtn);
